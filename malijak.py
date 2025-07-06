@@ -8,16 +8,17 @@ from huggingface_hub.utils import HfHubHTTPError
 # توکن‌های خود را اینجا قرار دهید
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 HF_TOKEN = os.getenv("HF_TOKEN") # توکن Hugging Face شما
-WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+# WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 RANDOM_SECRET_TOKEN = os.getenv("RANDOM_SECRET_TOKEN")
 
 # متغیرهای مربوط به Webhook
 # اینها را هم به عنوان متغیر محیطی در Render تنظیم کنید
-PORT = int(os.environ.get("PORT", 4000)) # Render یک متغیر PORT رو در اختیارتون میذاره، معمولا 10000
+PORT = int(os.environ.get("PORT", 10000)) # Render یک متغیر PORT رو در اختیارتون میذاره، معمولا 10000
 WEBHOOK_PATH = "/webhook" # مسیری که تلگرام به اون درخواست میفرسته
 
 # این WEBHOOK_URL رو بعد از استقرار سرویس در Render و گرفتن آدرس عمومی، در تنظیمات Render ست کنید
 # مثال: https://your-render-service-name.onrender.com/webhook
+WEBHOOK_URL = os.environ.get("WEBHOOK_URL", f"http://localhost:{PORT}{WEBHOOK_PATH}")
 
 MODEL_ID = "google/gemma-2b-it"
 
