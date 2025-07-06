@@ -114,7 +114,7 @@ def main() -> None:
 
     # شروع ربات با Webhook
     application.run_webhook(
-        listen="https://mali-118b.onrender.com",           # گوش دادن به تمام اینترفیس‌ها
+        listen="0.0.0.0",           # گوش دادن به تمام اینترفیس‌ها
         port=PORT,                  # پورت اختصاص داده شده توسط Render
         url_path=WEBHOOK_PATH,      # مسیر داخلی برای webhook
         webhook_url=WEBHOOK_URL,    # URL عمومی که تلگرام درخواست‌ها رو به اون میفرسته
