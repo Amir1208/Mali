@@ -18,7 +18,7 @@ WEBHOOK_PATH = "/webhook" # مسیری که تلگرام به اون درخوا�
 
 # این WEBHOOK_URL رو بعد از استقرار سرویس در Render و گرفتن آدرس عمومی، در تنظیمات Render ست کنید
 # مثال: https://your-render-service-name.onrender.com/webhook
-WEBHOOK_URL = os.environ.get("WEBHOOK_URL", f"http://localhost:{PORT}{WEBHOOK_PATH}")
+WEBHOOK_URL = os.environ.get("WEBHOOK_URL", f"https://mali-118b.onrender.com:{PORT}{WEBHOOK_PATH}")
 
 MODEL_ID = "google/gemma-2b-it"
 
