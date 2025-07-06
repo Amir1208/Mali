@@ -4,7 +4,6 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from huggingface_hub import InferenceClient # وارد کردن InferenceClient
 from huggingface_hub.utils import HfHubHTTPError
-from flask import Flask
 
 # توکن‌های خود را اینجا قرار دهید
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
