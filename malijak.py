@@ -4,6 +4,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from huggingface_hub import InferenceClient # وارد کردن InferenceClient
 from huggingface_hub.utils import HfHubHTTPError
+from flask import Flask
 
 # توکن‌های خود را اینجا قرار دهید
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -100,5 +101,13 @@ def main() -> None:
     # شروع نظرسنجی برای به‌روزرسانی‌ها
     application.run_polling()
 
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Bot is running!'
+
 if __name__ == '__main__':
     main()
+    port = int(os.environ.get('PORT', 10000)) # Default to 10000 if PORT isn't set
+    app.run(host='0.0.0.0', port=port)
