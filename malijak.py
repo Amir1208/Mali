@@ -6,8 +6,8 @@ from huggingface_hub import InferenceClient # وارد کردن InferenceClient
 from huggingface_hub.utils import HfHubHTTPError
 
 # توکن‌های خود را اینجا قرار دهید
-TELEGRAM_TOKEN = ""
-HF_TOKEN = "" # توکن Hugging Face شما
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+HF_TOKEN = os.getenv("HF_TOKEN") # توکن Hugging Face شما
 
 MODEL_ID = "google/gemma-2b-it"
 
