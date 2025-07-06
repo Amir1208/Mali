@@ -15,11 +15,11 @@ RANDOM_SECRET_TOKEN = os.getenv("RANDOM_SECRET_TOKEN")
 # اینها را هم به عنوان متغیر محیطی در Render تنظیم کنید
 # PORT = int(os.environ.get("PORT", 80)) # Render یک متغیر PORT رو در اختیارتون میذاره، معمولا 10000
 PORT = 80
-# WEBHOOK_PATH = "/webhook" # مسیری که تلگرام به اون درخواست میفرسته
+WEBHOOK_PATH = "/webhook" # مسیری که تلگرام به اون درخواست میفرسته
 
 # این WEBHOOK_URL رو بعد از استقرار سرویس در Render و گرفتن آدرس عمومی، در تنظیمات Render ست کنید
 # مثال: https://your-render-service-name.onrender.com/webhook
-WEBHOOK_URL = os.environ.get("WEBHOOK_URL", f"https://mali-118b.onrender.com:{PORT}")
+WEBHOOK_URL = os.environ.get("WEBHOOK_URL", f"https://mali-118b.onrender.com:{PORT}{WEBHOOK_PATH}")
 
 MODEL_ID = "google/gemma-2b-it"
 
@@ -114,9 +114,9 @@ def main() -> None:
 
     # شروع ربات با Webhook
     application.run_webhook(
-        listen="0.0.0.0",           # گوش دادن به تمام اینترفیس‌ها
+        listen="https://mali-118b.onrender.com",           # گوش دادن به تمام اینترفیس‌ها
         port=PORT,                  # پورت اختصاص داده شده توسط Render
-        url_path="",      # مسیر داخلی برای webhook
+        url_path=WEBHOOK_PATH,      # مسیر داخلی برای webhook
         webhook_url=WEBHOOK_URL,    # URL عمومی که تلگرام درخواست‌ها رو به اون میفرسته
         secret_token=RANDOM_SECRET_TOKEN # توصیه میشه از یک توکن تصادفی برای امنیت استفاده کنید
                                                 # و اون رو هم به عنوان متغیر محیطی ست کنید.
