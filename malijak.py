@@ -116,7 +116,7 @@ def main() -> None:
         port=PORT,                  # پورت اختصاص داده شده توسط Render
         url_path=WEBHOOK_PATH,      # مسیر داخلی برای webhook
         webhook_url=WEBHOOK_URL,    # URL عمومی که تلگرام درخواست‌ها رو به اون میفرسته
-        secret_token=YOUR_RANDOM_SECRET_TOKEN # توصیه میشه از یک توکن تصادفی برای امنیت استفاده کنید
+        secret_token=RANDOM_SECRET_TOKEN # توصیه میشه از یک توکن تصادفی برای امنیت استفاده کنید
                                                 # و اون رو هم به عنوان متغیر محیطی ست کنید.
     )
 
