@@ -9,6 +9,16 @@ from flask import Flask
 # توکن‌های خود را اینجا قرار دهید
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 HF_TOKEN = os.getenv("HF_TOKEN") # توکن Hugging Face شما
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+RANDOM_SECRET_TOKEN = os.getenv("RANDOM_SECRET_TOKEN")
+
+# متغیرهای مربوط به Webhook
+# اینها را هم به عنوان متغیر محیطی در Render تنظیم کنید
+PORT = int(os.environ.get("PORT", 4000)) # Render یک متغیر PORT رو در اختیارتون میذاره، معمولا 10000
+WEBHOOK_PATH = "/webhook" # مسیری که تلگرام به اون درخواست میفرسته
+
+# این WEBHOOK_URL رو بعد از استقرار سرویس در Render و گرفتن آدرس عمومی، در تنظیمات Render ست کنید
+# مثال: https://your-render-service-name.onrender.com/webhook
 
 MODEL_ID = "google/gemma-2b-it"
 
@@ -97,9 +107,19 @@ def main() -> None:
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    print("Bot is running with updated error handling using Hugging Face InferenceClient...")
+    print(f"Bot is starting in webhook mode on port {PORT}...")
     # شروع نظرسنجی برای به‌روزرسانی‌ها
-    application.run_polling()
+    # application.run_polling()
+
+    # شروع ربات با Webhook
+    application.run_webhook(
+        listen="0.0.0.0",           # گوش دادن به تمام اینترفیس‌ها
+        port=PORT,                  # پورت اختصاص داده شده توسط Render
+        url_path=WEBHOOK_PATH,      # مسیر داخلی برای webhook
+        webhook_url=WEBHOOK_URL,    # URL عمومی که تلگرام درخواست‌ها رو به اون میفرسته
+        secret_token=YOUR_RANDOM_SECRET_TOKEN # توصیه میشه از یک توکن تصادفی برای امنیت استفاده کنید
+                                                # و اون رو هم به عنوان متغیر محیطی ست کنید.
+    )
 
 # app = Flask(__name__)
 
