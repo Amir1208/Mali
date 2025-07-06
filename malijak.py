@@ -24,7 +24,7 @@ client = InferenceClient(
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """این تابع پیام خوش‌آمدگویی را هنگام شروع ربات ارسال می‌کند."""
     user_name = update.message.from_user.first_name
-    await update.message.reply_text(f"سلام {user_name}! 👋\nمن به هوش مصنوعی Hugging Face متصل هستم. سوالت رو بپرس.")
+    await update.message.reply_text(f"سلام {user_name}! 👋 ملیجکم.")
 
 BOT_USERNAME = "@MaliJakEdarBar_bot"
 # --- تابع اصلاح‌شده برای پردازش پیام ---
@@ -44,7 +44,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         user_message = text
 
     # نمایش پیام "در حال پردازش..."
-    processing_message = await update.message.reply_text("🧠 در حال پردازش سوال شما... (بار اول ممکن است کمی طول بکشد)")
+    processing_message = await update.message.reply_text("🧠 در حال پردازش سوال شما...")
 
     try:
         # استفاده از InferenceClient برای فراخوانی مدل
@@ -67,7 +67,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         else:
             # اگر ساختار پاسخ غیرمنتظره بود
             print(f"Unexpected API Response Structure: {completion}")
-            response_text = "⚠️ پاسخ غیرمنتظره‌ای از سرویس دریافت شد."
+            response_text = "⚠️ پاسخ غیرمنتظره"
 
     except HfHubHTTPError as e:
         # مدیریت خطاهای HTTP خاص از Hugging Face Hub
@@ -75,13 +75,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         error_details = str(e)
 
         if "is currently loading" in error_details:
-            response_text = "⏳ مدل در حال بارگذاری است. لطفاً حدود یک دقیقه دیگر دوباره تلاش کنید."
+            response_text = "⏳ در حال بارگذاری است..."
         else:
-            response_text = f"⚠️ متاسفانه در ارتباط با سرویس هوش مصنوعی خطایی رخ داد: {error_details}"
+            response_text = f"⚠️ خطا: {error_details}"
     except Exception as e:
         # مدیریت خطاهای کلی
         print(f"General Error: {e}")
-        response_text = "⚠️ متاسفانه یک خطای کلی در ربات رخ داد."
+        response_text = "⚠️ یک خطای کلی رخ داد"
 
     # ویرایش پیام "در حال پردازش..." با پاسخ نهایی
     await context.bot.edit_message_text(chat_id=update.message.chat_id,
