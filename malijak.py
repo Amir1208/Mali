@@ -13,7 +13,7 @@ RANDOM_SECRET_TOKEN = os.getenv("RANDOM_SECRET_TOKEN")
 
 # متغیرهای مربوط به Webhook
 # اینها را هم به عنوان متغیر محیطی در Render تنظیم کنید
-PORT = int(os.environ.get("PORT", 10000)) # Render یک متغیر PORT رو در اختیارتون میذاره، معمولا 10000
+PORT = int(os.environ.get("PORT", 80)) # Render یک متغیر PORT رو در اختیارتون میذاره، معمولا 10000
 WEBHOOK_PATH = "/webhook" # مسیری که تلگرام به اون درخواست میفرسته
 
 # این WEBHOOK_URL رو بعد از استقرار سرویس در Render و گرفتن آدرس عمومی، در تنظیمات Render ست کنید
